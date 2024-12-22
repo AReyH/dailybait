@@ -162,6 +162,11 @@ cython_debug/
 #.idea/
 
 
+# This is a personal note: if I'm adding files that have already been pushed
+# I should run the following on the command line:
+# git check-ignore -v router_test.py
+
+
 router_test.py
 router_test_test.py
 test_json.ipynb
