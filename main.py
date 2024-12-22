@@ -1,61 +1,82 @@
-from enum import Enum
-from fastapi import FastAPI, HTTPException
-from pydantic import BaseModel
+from fastapi import FastAPI
+from fastapi.responses import HTMLResponse
+import json
+import random
 
 app = FastAPI()
 
-class Category(Enum):
-    TOOLS = 'tools'
-    CONSUMABLES = 'consumables'
+# Load baits from baits.json
+with open('./data/baits.json', 'r') as json_file:
+    baits = json.load(json_file)
 
-class Item(BaseModel):
-    name: str
-    price: float
-    count: int
-    id: int
-    category: Category
+# Dictionary to store dynamically generated routes
+with open('./static/routes.json', 'r') as json_file:
+    dynamic_routes = json.load(json_file)
 
 
-items = {
-    0: Item(name='Hammer',price=9.99,count=20,id=0,category=Category.TOOLS),
-    1: Item(name='Pliers',price=5.99,count=20,id=1,category=Category.TOOLS),
-    2: Item(name='Nails',price=1.99,count=100,id=0,category=Category.CONSUMABLES)
-}
+def add_dynamic_routes(app: FastAPI, route_dict: dict):
+    """
+    Adds routes dynamically to the FastAPI app.
 
-@app.get('/')
-def index() -> dict[str, dict[int, Item]]:
-    return {'items':items}
+    Args:
+        app (FastAPI): The FastAPI application instance.
+        route_dict (dict): Dictionary mapping route keys to route paths.
+    """
+    for route_id, route_data in route_dict.items():
+        route_path = route_data["path"]
+
+        # Create a new route for each path
+        @app.get(route_path, response_class=HTMLResponse)
+        async def dynamic_route(route_id=route_id):
+            bait = baits[str(route_id)]
+            title = bait[0]
+            response = bait[1]
+            return f"""
+            <html>
+                <head>
+                    <title>{title}</title>
+                </head>
+                <body>
+                    <h1><strong>{title}</strong></h1>
+                    <p>{response}</p>
+                </body>
+            </html>
+            """
 
 
-@app.get('/items/{item_id}')
-def query_item_by_id(item_id:int) -> Item:
-    if item_id not in items:
-        raise HTTPException(status_code=404,detail=f'Item with id: {item_id} does not exist')
-    
-    return items[item_id]
-    \
+def generate_routes_from_baits(count: int = 1) -> dict:
+    """
+    Generates a dictionary of routes from baits.json.
 
-Selection = dict[
-    str, str | int | float | Category | None
-]
+    Args:
+        count (int): Number of routes to generate.
 
-@app.get('/items/')
-def query_item_by_paramters(
-    name: str | None = None,
-    price: float | None = None,
-    count: int | None = None,
-    category: Category | None = None) -> dict[str, Selection]:
-    
-    def check_item(item: Item) -> bool:
-        return all(
-            (
-                name is None or item.name == name,
-                price is None or item.price == price,
-                count is None or item.count =! count,
-                category is None or item.category is category
+    Returns:
+        dict: Dictionary of generated routes.
+    """
+    selected_routes = {}
+    selected_ids = random.sample(list(baits.keys()), count)
 
-            )
-                )
-    
-    selection = [item for item in items.values() if check_item(item)]
+    for route_id in selected_ids:
+        route_path = f"/{random.randint(1000, 9999)}"
+        selected_routes[route_id] = {"path": route_path}
 
+    return selected_routes
+
+
+@app.on_event("startup")
+async def setup_routes():
+    # Generate 5 routes from baits.json
+    new_routes = generate_routes_from_baits(count=1)
+    dynamic_routes.update(new_routes)
+    add_dynamic_routes(app, dynamic_routes)
+
+    # Save updated routes to a file for reference
+    with open('./static/routes.json', 'w') as fp:
+        json.dump(dynamic_routes, fp)
+
+
+# Static root route
+@app.get("/")
+async def read_root():
+    return {"message": "Welcome to the dynamic baits app!"}

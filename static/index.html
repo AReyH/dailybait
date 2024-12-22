@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Routes</title>
+    <script>
+        async function loadRoutes() {
+            const response = await fetch('/test.json'); // Assuming test.json is served at the root
+            const routes = await response.json();
+            const routesContainer = document.getElementById('routes');
+
+            for (const [id, path] of Object.entries(routes)) {
+                const routeLink = document.createElement('a');
+                routeLink.href = path;
+                routeLink.textContent = `Route ${id}: ${path}`;
+                routeLink.style.display = 'block';
+                routesContainer.appendChild(routeLink);
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', loadRoutes);
+    </script>
+</head>
+<body>
+    <h1>Dynamic Routes</h1>
+    <div id="routes">
+        <p>Loading routes...</p>
+    </div>
+</body>
+</html>
