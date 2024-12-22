@@ -1,31 +1,25 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
 from fastapi.responses import HTMLResponse
+from fastapi.templating import Jinja2Templates
 import json
 import random
 
 app = FastAPI()
 
-# Load baits from baits.json
+templates = Jinja2Templates(directory="templates")
+
 with open('./data/baits.json', 'r') as json_file:
     baits = json.load(json_file)
 
-# Dictionary to store dynamically generated routes
 with open('./static/routes.json', 'r') as json_file:
     dynamic_routes = json.load(json_file)
 
 
 def add_dynamic_routes(app: FastAPI, route_dict: dict):
-    """
-    Adds routes dynamically to the FastAPI app.
-
-    Args:
-        app (FastAPI): The FastAPI application instance.
-        route_dict (dict): Dictionary mapping route keys to route paths.
-    """
     for route_id, route_data in route_dict.items():
         route_path = route_data["path"]
 
-        # Create a new route for each path
+        # This creates a new route for each path 
         @app.get(route_path, response_class=HTMLResponse)
         async def dynamic_route(route_id=route_id):
             bait = baits[str(route_id)]
@@ -45,15 +39,6 @@ def add_dynamic_routes(app: FastAPI, route_dict: dict):
 
 
 def generate_routes_from_baits(count: int = 1) -> dict:
-    """
-    Generates a dictionary of routes from baits.json.
-
-    Args:
-        count (int): Number of routes to generate.
-
-    Returns:
-        dict: Dictionary of generated routes.
-    """
     selected_routes = {}
     selected_ids = random.sample(list(baits.keys()), count)
 
@@ -77,6 +62,8 @@ async def setup_routes():
 
 
 # Static root route
-@app.get("/")
-async def read_root():
-    return {"message": "Welcome to the dynamic baits app!"}
+@app.get("/", response_class=HTMLResponse)
+async def read_root(request: Request):
+    return templates.TemplateResponse(
+        "index.html", {"request": request, "routes": dynamic_routes, "baits": baits}
+    )
