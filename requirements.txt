@@ -1,0 +1,51 @@
+annotated-types @ file:///home/conda/feedstock_root/build_artifacts/annotated-types_1733247046149/work
+anyio @ file:///home/conda/feedstock_root/build_artifacts/anyio_1733532585909/work
+certifi @ file:///home/conda/feedstock_root/build_artifacts/certifi_1725278078093/work/certifi
+charset-normalizer==3.4.0
+click @ file:///home/conda/feedstock_root/build_artifacts/click_1733221831880/work
+colorama @ file:///home/conda/feedstock_root/build_artifacts/colorama_1733218098505/work
+distro @ file:///home/conda/feedstock_root/build_artifacts/distro_1704321475663/work
+dnspython @ file:///home/conda/feedstock_root/build_artifacts/dnspython_1733256735222/work
+email_validator @ file:///home/conda/feedstock_root/build_artifacts/email-validator-meta_1733300719943/work
+exceptiongroup @ file:///home/conda/feedstock_root/build_artifacts/exceptiongroup_1733208806608/work
+fastapi @ file:///home/conda/feedstock_root/build_artifacts/fastapi_1733362299471/work
+fastapi-cli @ file:///home/conda/feedstock_root/build_artifacts/fastapi-cli_1728947708687/work
+greenlet @ file:///Users/runner/miniforge3/conda-bld/greenlet_1726922194774/work
+gunicorn @ file:///Users/runner/miniforge3/conda-bld/gunicorn_1724955971345/work
+h11 @ file:///home/conda/feedstock_root/build_artifacts/h11_1733327467879/work
+h2 @ file:///home/conda/feedstock_root/build_artifacts/h2_1733298745555/work
+hpack @ file:///home/conda/feedstock_root/build_artifacts/hpack_1733299205993/work
+httpcore @ file:///home/conda/feedstock_root/build_artifacts/bld/rattler-build_httpcore_1731707562/work
+httptools @ file:///Users/runner/miniforge3/conda-bld/httptools_1732707712903/work
+httpx @ file:///home/conda/feedstock_root/build_artifacts/httpx_1733663348460/work
+hyperframe @ file:///home/conda/feedstock_root/build_artifacts/hyperframe_1733298771451/work
+idna @ file:///home/conda/feedstock_root/build_artifacts/idna_1733211830134/work
+Jinja2 @ file:///home/conda/feedstock_root/build_artifacts/jinja2_1733217336947/work
+jiter @ file:///Users/runner/miniforge3/conda-bld/jiter_1732672355179/work
+markdown-it-py @ file:///home/conda/feedstock_root/build_artifacts/markdown-it-py_1733250460757/work
+MarkupSafe @ file:///Users/runner/miniforge3/conda-bld/markupsafe_1733219703897/work
+mdurl @ file:///home/conda/feedstock_root/build_artifacts/mdurl_1733255585584/work
+openai @ file:///home/conda/feedstock_root/build_artifacts/openai_1733780603667/work
+packaging @ file:///home/conda/feedstock_root/build_artifacts/packaging_1733203243479/work
+pydantic @ file:///home/conda/feedstock_root/build_artifacts/pydantic_1733316837492/work
+pydantic_core @ file:///Users/runner/miniforge3/conda-bld/pydantic-core_1732253986171/work
+Pygments @ file:///home/conda/feedstock_root/build_artifacts/pygments_1733221634316/work
+python-dotenv @ file:///home/conda/feedstock_root/build_artifacts/python-dotenv_1733243180666/work
+python-multipart @ file:///home/conda/feedstock_root/build_artifacts/python-multipart_1733323064783/work
+PyYAML @ file:///Users/runner/miniforge3/conda-bld/pyyaml_1725456203948/work
+requests==2.32.3
+rich @ file:///home/conda/feedstock_root/build_artifacts/rich_1733342254348/work/dist
+setuptools==75.6.0
+shellingham @ file:///home/conda/feedstock_root/build_artifacts/shellingham_1733300899265/work
+sniffio @ file:///home/conda/feedstock_root/build_artifacts/sniffio_1733244044561/work
+SQLAlchemy @ file:///Users/runner/miniforge3/conda-bld/sqlalchemy_1729066345506/work
+starlette @ file:///home/conda/feedstock_root/build_artifacts/starlette_1733344384719/work
+tqdm @ file:///home/conda/feedstock_root/build_artifacts/tqdm_1732497199771/work
+typer==0.15.1
+typer-slim==0.15.1
+typing_extensions @ file:///home/conda/feedstock_root/build_artifacts/typing_extensions_1733188668063/work
+urllib3==2.2.3
+uvicorn @ file:///home/conda/feedstock_root/build_artifacts/uvicorn_1733331924121/work
+uvloop @ file:///Users/runner/miniforge3/conda-bld/uvloop_1730214403293/work
+watchfiles @ file:///Users/runner/miniforge3/conda-bld/watchfiles_1732689430996/work
+websockets @ file:///Users/runner/miniforge3/conda-bld/websockets_1731498733651/work
