@@ -2,6 +2,8 @@
 
 dailybait is an app that generates a clickbait-style news headline every day, answering simple, attention-grabbing questions with short, punchy answers. Using FastAPI and the OpenAI API, it delivers a new headline daily with creativity and flair.
 
+Currently the app is deployed using Render. A test version of this app can be found here: https://test-dailybait.onrender.com.
+
 ## How it works:
 
 - `prompter.py`: Prompts OpenAI API and appends result into `baits.json`.
