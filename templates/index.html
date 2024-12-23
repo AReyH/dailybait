@@ -33,12 +33,21 @@
     </style>
 </head>
 <body>
-    <h1>Welcome to the Dynamic Baits App</h1>
-    <p>Click on a route to view its content:</p>
+    <div style="display: flex; align-items: center;">
+        <img src="./dailybait_logo.png" alt="dailybait logo" style="width: 50px; height: 50px; margin-right: 10px;">
+        <h1>dailybait</h1>
+    </div>
+    <p>Click on a headline to view its content:</p>
     <ul>
         {% for route_id, route_data in routes.items() %}
-        <li><a href="{{ route_data['path'] }}">Route {{ baits[route_id][0] }}</a></li>
+        <li><a href="{{ route_data['path'] }}">{{ baits[route_id][0] }}</a></li>
         {% endfor %}
     </ul>
 </body>
+
+<br></br>
+<footer>
+    <p>Author: Arturo Rey Haggar</p>
+    <p><a href="https://areyh.github.io/portfolio/">Portfolio</a></p>
+  </footer>
 </html>
