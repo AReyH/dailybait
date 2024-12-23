@@ -44,7 +44,6 @@ def generate_routes_from_baits(count: int = 1) -> dict:
 
 @app.on_event("startup")
 async def setup_routes():
-    # Generate 5 routes from baits.json
     new_routes = generate_routes_from_baits(count=1)
     dynamic_routes.update(new_routes)
     add_dynamic_routes(app, dynamic_routes)
