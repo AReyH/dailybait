@@ -19,23 +19,16 @@ def add_dynamic_routes(app: FastAPI, route_dict: dict):
     for route_id, route_data in route_dict.items():
         route_path = route_data["path"]
 
-        # This creates a new route for each path 
         @app.get(route_path, response_class=HTMLResponse)
-        async def dynamic_route(route_id=route_id):
+        async def dynamic_route(request: Request, route_id=route_id):
             bait = baits[str(route_id)]
             title = bait[0]
             response = bait[1]
-            return f"""
-            <html>
-                <head>
-                    <title>{title}</title>
-                </head>
-                <body>
-                    <h1><strong>{title}</strong></h1>
-                    <p>{response}</p>
-                </body>
-            </html>
-            """
+            return templates.TemplateResponse(
+                "route.html",
+                {"request": request, "title": title, "response": response},
+            )
+
 
 
 def generate_routes_from_baits(count: int = 1) -> dict:
